@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pjg_clip_generation.clip_generator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pjg_clip_generation.html"><font color="#ffffff">pjg_clip_generation</font></a>.clip_generator</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cthcuc%5Cpycharmprojects%5Cpoetic-justice-sound-processing%5Cpjg_clip_generation%5Cclip_generator.py">c:\users\thcuc\pycharmprojects\poetic-justice-sound-processing\pjg_clip_generation\clip_generator.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="logging.html">logging</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="subprocess.html">subprocess</a><br>
+</td><td width="25%" valign=top><a href="scipy.io.wavfile.html">scipy.io.wavfile</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pjg_clip_generation.clip_generator.html#ClipGenerator">ClipGenerator</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ClipGenerator">class <strong>ClipGenerator</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#ClipGenerator">ClipGenerator</a>(lines,&nbsp;start_times,&nbsp;end_times,&nbsp;filename,&nbsp;audio_filepath,&nbsp;font_file,&nbsp;fonts_dir,&nbsp;directory)<br>
+&nbsp;<br>
+this&nbsp;class&nbsp;is&nbsp;given<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;lines:&nbsp;a&nbsp;list&nbsp;of&nbsp;words&nbsp;(str),&nbsp;each&nbsp;line&nbsp;of&nbsp;words&nbsp;to&nbsp;be&nbsp;displayed&nbsp;together<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;start_times:&nbsp;a&nbsp;list&nbsp;of&nbsp;numbers&nbsp;(str),&nbsp;the&nbsp;start&nbsp;time&nbsp;of&nbsp;each&nbsp;line<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;end_times:&nbsp;a&nbsp;list&nbsp;of&nbsp;numbers&nbsp;(str),&nbsp;the&nbsp;end&nbsp;time&nbsp;of&nbsp;each&nbsp;line<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;filename:&nbsp;all&nbsp;results&nbsp;will&nbsp;be&nbsp;saved&nbsp;with&nbsp;this&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;audio_filepath:&nbsp;audio&nbsp;filepath&nbsp;to&nbsp;accompany&nbsp;words,&nbsp;can&nbsp;be&nbsp;empty<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;font_file:&nbsp;font&nbsp;filepath&nbsp;for&nbsp;the&nbsp;words&nbsp;on&nbsp;each&nbsp;line<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;directory:&nbsp;directory&nbsp;where&nbsp;results&nbsp;and&nbsp;temporary&nbsp;files&nbsp;are&nbsp;saved<br>
+and&nbsp;generates&nbsp;a&nbsp;videoclip&nbsp;with&nbsp;text&nbsp;that&nbsp;matches&nbsp;the&nbsp;audio&nbsp;clip&nbsp;(if&nbsp;given)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ClipGenerator-__init__"><strong>__init__</strong></a>(self, lines, start_times, end_times, filename, audio_filepath, font_file, fonts_dir, directory)</dt><dd><tt>Initialize&nbsp;Clip&nbsp;Generator</tt></dd></dl>
+
+<dl><dt><a name="ClipGenerator-adjust_times"><strong>adjust_times</strong></a>(self)</dt><dd><tt>Adjust&nbsp;start&nbsp;and&nbsp;end&nbsp;times</tt></dd></dl>
+
+<dl><dt><a name="ClipGenerator-calculate_duration"><strong>calculate_duration</strong></a>(self)</dt><dd><tt>Calculate&nbsp;audio&nbsp;duration</tt></dd></dl>
+
+<dl><dt><a name="ClipGenerator-generate_clip"><strong>generate_clip</strong></a>(self)</dt><dd><tt>Add&nbsp;audio&nbsp;to&nbsp;silent&nbsp;video</tt></dd></dl>
+
+<dl><dt><a name="ClipGenerator-generate_image_from_text"><strong>generate_image_from_text</strong></a>(self, text, img_filepath)</dt><dd><tt>Save&nbsp;image&nbsp;with&nbsp;text&nbsp;on&nbsp;black&nbsp;screen</tt></dd></dl>
+
+<dl><dt><a name="ClipGenerator-generate_silent_clip"><strong>generate_silent_clip</strong></a>(self)</dt><dd><tt>Concatenate&nbsp;all&nbsp;the&nbsp;word&nbsp;images&nbsp;into&nbsp;a&nbsp;silent&nbsp;video</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>logger</strong> = &lt;Logger pjg_clip_generation.clip_generator (WARNING)&gt;</td></tr></table>
+</body></html>

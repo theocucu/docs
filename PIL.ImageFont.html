@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module PIL.ImageFont</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="PIL.html"><font color="#ffffff">PIL</font></a>.ImageFont</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cthcuc%5Cappdata%5Clocal%5Cprograms%5Cpython%5Cpython38%5Clib%5Csite-packages%5Cpil%5Cimagefont.py">c:\users\thcuc\appdata\local\programs\python\python38\lib\site-packages\pil\imagefont.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;The&nbsp;Python&nbsp;Imaging&nbsp;Library.<br>
+#&nbsp;$Id$<br>
+#<br>
+#&nbsp;PIL&nbsp;raster&nbsp;font&nbsp;management<br>
+#<br>
+#&nbsp;History:<br>
+#&nbsp;1996-08-07&nbsp;fl&nbsp;&nbsp;&nbsp;created&nbsp;(experimental)<br>
+#&nbsp;1997-08-25&nbsp;fl&nbsp;&nbsp;&nbsp;minor&nbsp;adjustments&nbsp;to&nbsp;handle&nbsp;fonts&nbsp;from&nbsp;pilfont&nbsp;0.3<br>
+#&nbsp;1999-02-06&nbsp;fl&nbsp;&nbsp;&nbsp;rewrote&nbsp;most&nbsp;font&nbsp;management&nbsp;stuff&nbsp;in&nbsp;C<br>
+#&nbsp;1999-03-17&nbsp;fl&nbsp;&nbsp;&nbsp;take&nbsp;pth&nbsp;files&nbsp;into&nbsp;account&nbsp;in&nbsp;load_path&nbsp;(from&nbsp;Richard&nbsp;Jones)<br>
+#&nbsp;2001-02-17&nbsp;fl&nbsp;&nbsp;&nbsp;added&nbsp;freetype&nbsp;support<br>
+#&nbsp;2001-05-09&nbsp;fl&nbsp;&nbsp;&nbsp;added&nbsp;<a href="#TransposedFont">TransposedFont</a>&nbsp;wrapper&nbsp;class<br>
+#&nbsp;2002-03-04&nbsp;fl&nbsp;&nbsp;&nbsp;make&nbsp;sure&nbsp;we&nbsp;have&nbsp;a&nbsp;"L"&nbsp;or&nbsp;"1"&nbsp;font<br>
+#&nbsp;2002-12-04&nbsp;fl&nbsp;&nbsp;&nbsp;skip&nbsp;non-directory&nbsp;entries&nbsp;in&nbsp;the&nbsp;system&nbsp;path<br>
+#&nbsp;2003-04-29&nbsp;fl&nbsp;&nbsp;&nbsp;add&nbsp;embedded&nbsp;default&nbsp;font<br>
+#&nbsp;2003-09-27&nbsp;fl&nbsp;&nbsp;&nbsp;added&nbsp;support&nbsp;for&nbsp;truetype&nbsp;charmap&nbsp;encodings<br>
+#<br>
+#&nbsp;Todo:<br>
+#&nbsp;Adapt&nbsp;to&nbsp;PILFONT2&nbsp;format&nbsp;(16-bit&nbsp;fonts,&nbsp;compressed,&nbsp;single&nbsp;file)<br>
+#<br>
+#&nbsp;Copyright&nbsp;(c)&nbsp;1997-2003&nbsp;by&nbsp;Secret&nbsp;Labs&nbsp;AB<br>
+#&nbsp;Copyright&nbsp;(c)&nbsp;1996-2003&nbsp;by&nbsp;Fredrik&nbsp;Lundh<br>
+#<br>
+#&nbsp;See&nbsp;the&nbsp;README&nbsp;file&nbsp;for&nbsp;information&nbsp;on&nbsp;usage&nbsp;and&nbsp;redistribution.<br>
+#</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="PIL.Image.html">PIL.Image</a><br>
+<a href="base64.html">base64</a><br>
+</td><td width="25%" valign=top><a href="PIL._imagingft.html">PIL._imagingft</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="warnings.html">warnings</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="PIL.ImageFont.html#FreeTypeFont">FreeTypeFont</a>
+</font></dt><dt><font face="helvetica, arial"><a href="PIL.ImageFont.html#ImageFont">ImageFont</a>
+</font></dt><dt><font face="helvetica, arial"><a href="PIL.ImageFont.html#TransposedFont">TransposedFont</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="enum.html#IntEnum">enum.IntEnum</a>(<a href="builtins.html#int">builtins.int</a>, <a href="enum.html#Enum">enum.Enum</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="PIL.ImageFont.html#Layout">Layout</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FreeTypeFont">class <strong>FreeTypeFont</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#FreeTypeFont">FreeTypeFont</a>(font=None,&nbsp;size=10,&nbsp;index=0,&nbsp;encoding='',&nbsp;layout_engine=None)<br>
+&nbsp;<br>
+FreeType&nbsp;font&nbsp;wrapper&nbsp;(requires&nbsp;_imagingft&nbsp;service)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="FreeTypeFont-__getstate__"><strong>__getstate__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FreeTypeFont-__init__"><strong>__init__</strong></a>(self, font=None, size=10, index=0, encoding='', layout_engine=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-__setstate__"><strong>__setstate__</strong></a>(self, state)</dt></dl>
+
+<dl><dt><a name="FreeTypeFont-font_variant"><strong>font_variant</strong></a>(self, font=None, size=None, index=None, encoding=None, layout_engine=None)</dt><dd><tt>Create&nbsp;a&nbsp;copy&nbsp;of&nbsp;this&nbsp;<a href="#FreeTypeFont">FreeTypeFont</a>&nbsp;<a href="builtins.html#object">object</a>,<br>
+using&nbsp;any&nbsp;specified&nbsp;arguments&nbsp;to&nbsp;override&nbsp;the&nbsp;settings.<br>
+&nbsp;<br>
+Parameters&nbsp;are&nbsp;identical&nbsp;to&nbsp;the&nbsp;parameters&nbsp;used&nbsp;to&nbsp;initialize&nbsp;this<br>
+<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+:return:&nbsp;A&nbsp;<a href="#FreeTypeFont">FreeTypeFont</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-get_variation_axes"><strong>get_variation_axes</strong></a>(self)</dt><dd><tt>:returns:&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;axes&nbsp;in&nbsp;a&nbsp;variation&nbsp;font.<br>
+:exception&nbsp;OSError:&nbsp;If&nbsp;the&nbsp;font&nbsp;is&nbsp;not&nbsp;a&nbsp;variation&nbsp;font.</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-get_variation_names"><strong>get_variation_names</strong></a>(self)</dt><dd><tt>:returns:&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;named&nbsp;styles&nbsp;in&nbsp;a&nbsp;variation&nbsp;font.<br>
+:exception&nbsp;OSError:&nbsp;If&nbsp;the&nbsp;font&nbsp;is&nbsp;not&nbsp;a&nbsp;variation&nbsp;font.</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-getbbox"><strong>getbbox</strong></a>(self, text, mode='', direction=None, features=None, language=None, stroke_width=0, anchor=None)</dt><dd><tt>Returns&nbsp;bounding&nbsp;box&nbsp;(in&nbsp;pixels)&nbsp;of&nbsp;given&nbsp;text&nbsp;relative&nbsp;to&nbsp;given&nbsp;anchor<br>
+when&nbsp;rendered&nbsp;in&nbsp;font&nbsp;with&nbsp;provided&nbsp;direction,&nbsp;features,&nbsp;and&nbsp;language.<br>
+&nbsp;<br>
+Use&nbsp;:py:meth:`<a href="#FreeTypeFont-getlength">getlength</a>()`&nbsp;to&nbsp;get&nbsp;the&nbsp;offset&nbsp;of&nbsp;following&nbsp;text&nbsp;with<br>
+1/64&nbsp;pixel&nbsp;precision.&nbsp;The&nbsp;bounding&nbsp;box&nbsp;includes&nbsp;extra&nbsp;margins&nbsp;for<br>
+some&nbsp;fonts,&nbsp;e.g.&nbsp;italics&nbsp;or&nbsp;accents.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;8.0.0<br>
+&nbsp;<br>
+:param&nbsp;text:&nbsp;Text&nbsp;to&nbsp;render.<br>
+:param&nbsp;mode:&nbsp;Used&nbsp;by&nbsp;some&nbsp;graphics&nbsp;drivers&nbsp;to&nbsp;indicate&nbsp;what&nbsp;mode&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;driver&nbsp;prefers;&nbsp;if&nbsp;empty,&nbsp;the&nbsp;renderer&nbsp;may&nbsp;return&nbsp;either<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode.&nbsp;Note&nbsp;that&nbsp;the&nbsp;mode&nbsp;is&nbsp;always&nbsp;a&nbsp;string,&nbsp;to&nbsp;simplify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C-level&nbsp;implementations.<br>
+&nbsp;<br>
+:param&nbsp;direction:&nbsp;Direction&nbsp;of&nbsp;the&nbsp;text.&nbsp;It&nbsp;can&nbsp;be&nbsp;'rtl'&nbsp;(right&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left),&nbsp;'ltr'&nbsp;(left&nbsp;to&nbsp;right)&nbsp;or&nbsp;'ttb'&nbsp;(top&nbsp;to&nbsp;bottom).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+:param&nbsp;features:&nbsp;A&nbsp;list&nbsp;of&nbsp;OpenType&nbsp;font&nbsp;features&nbsp;to&nbsp;be&nbsp;used&nbsp;during&nbsp;text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layout.&nbsp;This&nbsp;is&nbsp;usually&nbsp;used&nbsp;to&nbsp;turn&nbsp;on&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font&nbsp;features&nbsp;that&nbsp;are&nbsp;not&nbsp;enabled&nbsp;by&nbsp;default,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;example&nbsp;'dlig'&nbsp;or&nbsp;'ss01',&nbsp;but&nbsp;can&nbsp;be&nbsp;also<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;turn&nbsp;off&nbsp;default&nbsp;font&nbsp;features&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example&nbsp;'-liga'&nbsp;to&nbsp;disable&nbsp;ligatures&nbsp;or&nbsp;'-kern'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;disable&nbsp;kerning.&nbsp;&nbsp;To&nbsp;get&nbsp;all&nbsp;supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features,&nbsp;see<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://learn.microsoft.com/en-us/typography/opentype/spec/featurelist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+:param&nbsp;language:&nbsp;Language&nbsp;of&nbsp;the&nbsp;text.&nbsp;Different&nbsp;languages&nbsp;may&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;different&nbsp;glyph&nbsp;shapes&nbsp;or&nbsp;ligatures.&nbsp;This&nbsp;parameter&nbsp;tells<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;font&nbsp;which&nbsp;language&nbsp;the&nbsp;text&nbsp;is&nbsp;in,&nbsp;and&nbsp;to&nbsp;apply&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;correct&nbsp;substitutions&nbsp;as&nbsp;appropriate,&nbsp;if&nbsp;available.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;should&nbsp;be&nbsp;a&nbsp;`BCP&nbsp;47&nbsp;language&nbsp;code<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;https://www.w3.org/International/articles/language-tags/&gt;`_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+:param&nbsp;stroke_width:&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;text&nbsp;stroke.<br>
+&nbsp;<br>
+:param&nbsp;anchor:&nbsp;&nbsp;The&nbsp;text&nbsp;anchor&nbsp;alignment.&nbsp;Determines&nbsp;the&nbsp;relative&nbsp;location&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;anchor&nbsp;to&nbsp;the&nbsp;text.&nbsp;The&nbsp;default&nbsp;alignment&nbsp;is&nbsp;top&nbsp;left.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See&nbsp;:ref:`text-anchors`&nbsp;for&nbsp;valid&nbsp;values.<br>
+&nbsp;<br>
+:return:&nbsp;``(left,&nbsp;top,&nbsp;right,&nbsp;bottom)``&nbsp;bounding&nbsp;box</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-getlength"><strong>getlength</strong></a>(self, text, mode='', direction=None, features=None, language=None)</dt><dd><tt>Returns&nbsp;length&nbsp;(in&nbsp;pixels&nbsp;with&nbsp;1/64&nbsp;precision)&nbsp;of&nbsp;given&nbsp;text&nbsp;when&nbsp;rendered<br>
+in&nbsp;font&nbsp;with&nbsp;provided&nbsp;direction,&nbsp;features,&nbsp;and&nbsp;language.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;amount&nbsp;by&nbsp;which&nbsp;following&nbsp;text&nbsp;should&nbsp;be&nbsp;offset.<br>
+Text&nbsp;bounding&nbsp;box&nbsp;may&nbsp;extend&nbsp;past&nbsp;the&nbsp;length&nbsp;in&nbsp;some&nbsp;fonts,<br>
+e.g.&nbsp;when&nbsp;using&nbsp;italics&nbsp;or&nbsp;accents.<br>
+&nbsp;<br>
+The&nbsp;result&nbsp;is&nbsp;returned&nbsp;as&nbsp;a&nbsp;float;&nbsp;it&nbsp;is&nbsp;a&nbsp;whole&nbsp;number&nbsp;if&nbsp;using&nbsp;basic&nbsp;layout.<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;the&nbsp;sum&nbsp;of&nbsp;two&nbsp;lengths&nbsp;may&nbsp;not&nbsp;equal&nbsp;the&nbsp;length&nbsp;of&nbsp;a&nbsp;concatenated<br>
+string&nbsp;due&nbsp;to&nbsp;kerning.&nbsp;If&nbsp;you&nbsp;need&nbsp;to&nbsp;adjust&nbsp;for&nbsp;kerning,&nbsp;include&nbsp;the&nbsp;following<br>
+character&nbsp;and&nbsp;subtract&nbsp;its&nbsp;length.<br>
+&nbsp;<br>
+For&nbsp;example,&nbsp;instead&nbsp;of&nbsp;::<br>
+&nbsp;<br>
+&nbsp;&nbsp;hello&nbsp;=&nbsp;font.<a href="#FreeTypeFont-getlength">getlength</a>("Hello")<br>
+&nbsp;&nbsp;world&nbsp;=&nbsp;font.<a href="#FreeTypeFont-getlength">getlength</a>("World")<br>
+&nbsp;&nbsp;hello_world&nbsp;=&nbsp;hello&nbsp;+&nbsp;world&nbsp;&nbsp;#&nbsp;not&nbsp;adjusted&nbsp;for&nbsp;kerning<br>
+&nbsp;&nbsp;assert&nbsp;hello_world&nbsp;==&nbsp;font.<a href="#FreeTypeFont-getlength">getlength</a>("HelloWorld")&nbsp;&nbsp;#&nbsp;may&nbsp;fail<br>
+&nbsp;<br>
+use&nbsp;::<br>
+&nbsp;<br>
+&nbsp;&nbsp;hello&nbsp;=&nbsp;font.<a href="#FreeTypeFont-getlength">getlength</a>("HelloW")&nbsp;-&nbsp;font.<a href="#FreeTypeFont-getlength">getlength</a>("W")&nbsp;&nbsp;#&nbsp;adjusted&nbsp;for&nbsp;kerning<br>
+&nbsp;&nbsp;world&nbsp;=&nbsp;font.<a href="#FreeTypeFont-getlength">getlength</a>("World")<br>
+&nbsp;&nbsp;hello_world&nbsp;=&nbsp;hello&nbsp;+&nbsp;world&nbsp;&nbsp;#&nbsp;adjusted&nbsp;for&nbsp;kerning<br>
+&nbsp;&nbsp;assert&nbsp;hello_world&nbsp;==&nbsp;font.<a href="#FreeTypeFont-getlength">getlength</a>("HelloWorld")&nbsp;&nbsp;#&nbsp;True<br>
+&nbsp;<br>
+or&nbsp;disable&nbsp;kerning&nbsp;with&nbsp;(requires&nbsp;libraqm)&nbsp;::<br>
+&nbsp;<br>
+&nbsp;&nbsp;hello&nbsp;=&nbsp;draw.textlength("Hello",&nbsp;font,&nbsp;features=["-kern"])<br>
+&nbsp;&nbsp;world&nbsp;=&nbsp;draw.textlength("World",&nbsp;font,&nbsp;features=["-kern"])<br>
+&nbsp;&nbsp;hello_world&nbsp;=&nbsp;hello&nbsp;+&nbsp;world&nbsp;&nbsp;#&nbsp;kerning&nbsp;is&nbsp;disabled,&nbsp;no&nbsp;need&nbsp;to&nbsp;adjust<br>
+&nbsp;&nbsp;assert&nbsp;hello_world&nbsp;==&nbsp;draw.textlength("HelloWorld",&nbsp;font,&nbsp;features=["-kern"])<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;8.0.0<br>
+&nbsp;<br>
+:param&nbsp;text:&nbsp;Text&nbsp;to&nbsp;measure.<br>
+:param&nbsp;mode:&nbsp;Used&nbsp;by&nbsp;some&nbsp;graphics&nbsp;drivers&nbsp;to&nbsp;indicate&nbsp;what&nbsp;mode&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;driver&nbsp;prefers;&nbsp;if&nbsp;empty,&nbsp;the&nbsp;renderer&nbsp;may&nbsp;return&nbsp;either<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode.&nbsp;Note&nbsp;that&nbsp;the&nbsp;mode&nbsp;is&nbsp;always&nbsp;a&nbsp;string,&nbsp;to&nbsp;simplify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C-level&nbsp;implementations.<br>
+&nbsp;<br>
+:param&nbsp;direction:&nbsp;Direction&nbsp;of&nbsp;the&nbsp;text.&nbsp;It&nbsp;can&nbsp;be&nbsp;'rtl'&nbsp;(right&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left),&nbsp;'ltr'&nbsp;(left&nbsp;to&nbsp;right)&nbsp;or&nbsp;'ttb'&nbsp;(top&nbsp;to&nbsp;bottom).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+:param&nbsp;features:&nbsp;A&nbsp;list&nbsp;of&nbsp;OpenType&nbsp;font&nbsp;features&nbsp;to&nbsp;be&nbsp;used&nbsp;during&nbsp;text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layout.&nbsp;This&nbsp;is&nbsp;usually&nbsp;used&nbsp;to&nbsp;turn&nbsp;on&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font&nbsp;features&nbsp;that&nbsp;are&nbsp;not&nbsp;enabled&nbsp;by&nbsp;default,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;example&nbsp;'dlig'&nbsp;or&nbsp;'ss01',&nbsp;but&nbsp;can&nbsp;be&nbsp;also<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;turn&nbsp;off&nbsp;default&nbsp;font&nbsp;features&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example&nbsp;'-liga'&nbsp;to&nbsp;disable&nbsp;ligatures&nbsp;or&nbsp;'-kern'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;disable&nbsp;kerning.&nbsp;&nbsp;To&nbsp;get&nbsp;all&nbsp;supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features,&nbsp;see<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://learn.microsoft.com/en-us/typography/opentype/spec/featurelist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+:param&nbsp;language:&nbsp;Language&nbsp;of&nbsp;the&nbsp;text.&nbsp;Different&nbsp;languages&nbsp;may&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;different&nbsp;glyph&nbsp;shapes&nbsp;or&nbsp;ligatures.&nbsp;This&nbsp;parameter&nbsp;tells<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;font&nbsp;which&nbsp;language&nbsp;the&nbsp;text&nbsp;is&nbsp;in,&nbsp;and&nbsp;to&nbsp;apply&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;correct&nbsp;substitutions&nbsp;as&nbsp;appropriate,&nbsp;if&nbsp;available.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;should&nbsp;be&nbsp;a&nbsp;`BCP&nbsp;47&nbsp;language&nbsp;code<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;https://www.w3.org/International/articles/language-tags/&gt;`_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+:return:&nbsp;Width&nbsp;for&nbsp;horizontal,&nbsp;height&nbsp;for&nbsp;vertical&nbsp;text.</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-getmask"><strong>getmask</strong></a>(self, text, mode='', direction=None, features=None, language=None, stroke_width=0, anchor=None, ink=0, start=None)</dt><dd><tt>Create&nbsp;a&nbsp;bitmap&nbsp;for&nbsp;the&nbsp;text.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;font&nbsp;uses&nbsp;antialiasing,&nbsp;the&nbsp;bitmap&nbsp;should&nbsp;have&nbsp;mode&nbsp;``L``&nbsp;and&nbsp;use&nbsp;a<br>
+maximum&nbsp;value&nbsp;of&nbsp;255.&nbsp;If&nbsp;the&nbsp;font&nbsp;has&nbsp;embedded&nbsp;color&nbsp;data,&nbsp;the&nbsp;bitmap<br>
+should&nbsp;have&nbsp;mode&nbsp;``RGBA``.&nbsp;Otherwise,&nbsp;it&nbsp;should&nbsp;have&nbsp;mode&nbsp;``1``.<br>
+&nbsp;<br>
+:param&nbsp;text:&nbsp;Text&nbsp;to&nbsp;render.<br>
+:param&nbsp;mode:&nbsp;Used&nbsp;by&nbsp;some&nbsp;graphics&nbsp;drivers&nbsp;to&nbsp;indicate&nbsp;what&nbsp;mode&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;driver&nbsp;prefers;&nbsp;if&nbsp;empty,&nbsp;the&nbsp;renderer&nbsp;may&nbsp;return&nbsp;either<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode.&nbsp;Note&nbsp;that&nbsp;the&nbsp;mode&nbsp;is&nbsp;always&nbsp;a&nbsp;string,&nbsp;to&nbsp;simplify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C-level&nbsp;implementations.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;1.1.5<br>
+&nbsp;<br>
+:param&nbsp;direction:&nbsp;Direction&nbsp;of&nbsp;the&nbsp;text.&nbsp;It&nbsp;can&nbsp;be&nbsp;'rtl'&nbsp;(right&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left),&nbsp;'ltr'&nbsp;(left&nbsp;to&nbsp;right)&nbsp;or&nbsp;'ttb'&nbsp;(top&nbsp;to&nbsp;bottom).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;4.2.0<br>
+&nbsp;<br>
+:param&nbsp;features:&nbsp;A&nbsp;list&nbsp;of&nbsp;OpenType&nbsp;font&nbsp;features&nbsp;to&nbsp;be&nbsp;used&nbsp;during&nbsp;text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layout.&nbsp;This&nbsp;is&nbsp;usually&nbsp;used&nbsp;to&nbsp;turn&nbsp;on&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font&nbsp;features&nbsp;that&nbsp;are&nbsp;not&nbsp;enabled&nbsp;by&nbsp;default,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;example&nbsp;'dlig'&nbsp;or&nbsp;'ss01',&nbsp;but&nbsp;can&nbsp;be&nbsp;also<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;turn&nbsp;off&nbsp;default&nbsp;font&nbsp;features&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example&nbsp;'-liga'&nbsp;to&nbsp;disable&nbsp;ligatures&nbsp;or&nbsp;'-kern'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;disable&nbsp;kerning.&nbsp;&nbsp;To&nbsp;get&nbsp;all&nbsp;supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features,&nbsp;see<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://learn.microsoft.com/en-us/typography/opentype/spec/featurelist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;4.2.0<br>
+&nbsp;<br>
+:param&nbsp;language:&nbsp;Language&nbsp;of&nbsp;the&nbsp;text.&nbsp;Different&nbsp;languages&nbsp;may&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;different&nbsp;glyph&nbsp;shapes&nbsp;or&nbsp;ligatures.&nbsp;This&nbsp;parameter&nbsp;tells<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;font&nbsp;which&nbsp;language&nbsp;the&nbsp;text&nbsp;is&nbsp;in,&nbsp;and&nbsp;to&nbsp;apply&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;correct&nbsp;substitutions&nbsp;as&nbsp;appropriate,&nbsp;if&nbsp;available.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;should&nbsp;be&nbsp;a&nbsp;`BCP&nbsp;47&nbsp;language&nbsp;code<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;https://www.w3.org/International/articles/language-tags/&gt;`_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;6.0.0<br>
+&nbsp;<br>
+:param&nbsp;stroke_width:&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;text&nbsp;stroke.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;6.2.0<br>
+&nbsp;<br>
+:param&nbsp;anchor:&nbsp;&nbsp;The&nbsp;text&nbsp;anchor&nbsp;alignment.&nbsp;Determines&nbsp;the&nbsp;relative&nbsp;location&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;anchor&nbsp;to&nbsp;the&nbsp;text.&nbsp;The&nbsp;default&nbsp;alignment&nbsp;is&nbsp;top&nbsp;left.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See&nbsp;:ref:`text-anchors`&nbsp;for&nbsp;valid&nbsp;values.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;8.0.0<br>
+&nbsp;<br>
+:param&nbsp;ink:&nbsp;Foreground&nbsp;ink&nbsp;for&nbsp;rendering&nbsp;in&nbsp;RGBA&nbsp;mode.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;8.0.0<br>
+&nbsp;<br>
+:param&nbsp;start:&nbsp;Tuple&nbsp;of&nbsp;horizontal&nbsp;and&nbsp;vertical&nbsp;offset,&nbsp;as&nbsp;text&nbsp;may&nbsp;render<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;differently&nbsp;when&nbsp;starting&nbsp;at&nbsp;fractional&nbsp;coordinates.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;9.4.0<br>
+&nbsp;<br>
+:return:&nbsp;An&nbsp;internal&nbsp;PIL&nbsp;storage&nbsp;memory&nbsp;instance&nbsp;as&nbsp;defined&nbsp;by&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:py:mod:`PIL.Image.core`&nbsp;interface&nbsp;module.</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-getmask2"><strong>getmask2</strong></a>(self, text, mode='', direction=None, features=None, language=None, stroke_width=0, anchor=None, ink=0, start=None, *args, **kwargs)</dt><dd><tt>Create&nbsp;a&nbsp;bitmap&nbsp;for&nbsp;the&nbsp;text.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;font&nbsp;uses&nbsp;antialiasing,&nbsp;the&nbsp;bitmap&nbsp;should&nbsp;have&nbsp;mode&nbsp;``L``&nbsp;and&nbsp;use&nbsp;a<br>
+maximum&nbsp;value&nbsp;of&nbsp;255.&nbsp;If&nbsp;the&nbsp;font&nbsp;has&nbsp;embedded&nbsp;color&nbsp;data,&nbsp;the&nbsp;bitmap<br>
+should&nbsp;have&nbsp;mode&nbsp;``RGBA``.&nbsp;Otherwise,&nbsp;it&nbsp;should&nbsp;have&nbsp;mode&nbsp;``1``.<br>
+&nbsp;<br>
+:param&nbsp;text:&nbsp;Text&nbsp;to&nbsp;render.<br>
+:param&nbsp;mode:&nbsp;Used&nbsp;by&nbsp;some&nbsp;graphics&nbsp;drivers&nbsp;to&nbsp;indicate&nbsp;what&nbsp;mode&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;driver&nbsp;prefers;&nbsp;if&nbsp;empty,&nbsp;the&nbsp;renderer&nbsp;may&nbsp;return&nbsp;either<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode.&nbsp;Note&nbsp;that&nbsp;the&nbsp;mode&nbsp;is&nbsp;always&nbsp;a&nbsp;string,&nbsp;to&nbsp;simplify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C-level&nbsp;implementations.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;1.1.5<br>
+&nbsp;<br>
+:param&nbsp;direction:&nbsp;Direction&nbsp;of&nbsp;the&nbsp;text.&nbsp;It&nbsp;can&nbsp;be&nbsp;'rtl'&nbsp;(right&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left),&nbsp;'ltr'&nbsp;(left&nbsp;to&nbsp;right)&nbsp;or&nbsp;'ttb'&nbsp;(top&nbsp;to&nbsp;bottom).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;4.2.0<br>
+&nbsp;<br>
+:param&nbsp;features:&nbsp;A&nbsp;list&nbsp;of&nbsp;OpenType&nbsp;font&nbsp;features&nbsp;to&nbsp;be&nbsp;used&nbsp;during&nbsp;text<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layout.&nbsp;This&nbsp;is&nbsp;usually&nbsp;used&nbsp;to&nbsp;turn&nbsp;on&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font&nbsp;features&nbsp;that&nbsp;are&nbsp;not&nbsp;enabled&nbsp;by&nbsp;default,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;example&nbsp;'dlig'&nbsp;or&nbsp;'ss01',&nbsp;but&nbsp;can&nbsp;be&nbsp;also<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used&nbsp;to&nbsp;turn&nbsp;off&nbsp;default&nbsp;font&nbsp;features&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example&nbsp;'-liga'&nbsp;to&nbsp;disable&nbsp;ligatures&nbsp;or&nbsp;'-kern'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;disable&nbsp;kerning.&nbsp;&nbsp;To&nbsp;get&nbsp;all&nbsp;supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features,&nbsp;see<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://learn.microsoft.com/en-us/typography/opentype/spec/featurelist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;4.2.0<br>
+&nbsp;<br>
+:param&nbsp;language:&nbsp;Language&nbsp;of&nbsp;the&nbsp;text.&nbsp;Different&nbsp;languages&nbsp;may&nbsp;use<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;different&nbsp;glyph&nbsp;shapes&nbsp;or&nbsp;ligatures.&nbsp;This&nbsp;parameter&nbsp;tells<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;font&nbsp;which&nbsp;language&nbsp;the&nbsp;text&nbsp;is&nbsp;in,&nbsp;and&nbsp;to&nbsp;apply&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;correct&nbsp;substitutions&nbsp;as&nbsp;appropriate,&nbsp;if&nbsp;available.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;should&nbsp;be&nbsp;a&nbsp;`BCP&nbsp;47&nbsp;language&nbsp;code<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;https://www.w3.org/International/articles/language-tags/&gt;`_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requires&nbsp;libraqm.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;6.0.0<br>
+&nbsp;<br>
+:param&nbsp;stroke_width:&nbsp;The&nbsp;width&nbsp;of&nbsp;the&nbsp;text&nbsp;stroke.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;6.2.0<br>
+&nbsp;<br>
+:param&nbsp;anchor:&nbsp;&nbsp;The&nbsp;text&nbsp;anchor&nbsp;alignment.&nbsp;Determines&nbsp;the&nbsp;relative&nbsp;location&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;anchor&nbsp;to&nbsp;the&nbsp;text.&nbsp;The&nbsp;default&nbsp;alignment&nbsp;is&nbsp;top&nbsp;left.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See&nbsp;:ref:`text-anchors`&nbsp;for&nbsp;valid&nbsp;values.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;8.0.0<br>
+&nbsp;<br>
+:param&nbsp;ink:&nbsp;Foreground&nbsp;ink&nbsp;for&nbsp;rendering&nbsp;in&nbsp;RGBA&nbsp;mode.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;8.0.0<br>
+&nbsp;<br>
+:param&nbsp;start:&nbsp;Tuple&nbsp;of&nbsp;horizontal&nbsp;and&nbsp;vertical&nbsp;offset,&nbsp;as&nbsp;text&nbsp;may&nbsp;render<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;differently&nbsp;when&nbsp;starting&nbsp;at&nbsp;fractional&nbsp;coordinates.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;9.4.0<br>
+&nbsp;<br>
+:return:&nbsp;A&nbsp;tuple&nbsp;of&nbsp;an&nbsp;internal&nbsp;PIL&nbsp;storage&nbsp;memory&nbsp;instance&nbsp;as&nbsp;defined&nbsp;by&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:py:mod:`PIL.Image.core`&nbsp;interface&nbsp;module,&nbsp;and&nbsp;the&nbsp;text&nbsp;offset,&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gap&nbsp;between&nbsp;the&nbsp;starting&nbsp;coordinate&nbsp;and&nbsp;the&nbsp;first&nbsp;marking</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-getmetrics"><strong>getmetrics</strong></a>(self)</dt><dd><tt>:return:&nbsp;A&nbsp;tuple&nbsp;of&nbsp;the&nbsp;font&nbsp;ascent&nbsp;(the&nbsp;distance&nbsp;from&nbsp;the&nbsp;baseline&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;highest&nbsp;outline&nbsp;point)&nbsp;and&nbsp;descent&nbsp;(the&nbsp;distance&nbsp;from&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;baseline&nbsp;to&nbsp;the&nbsp;lowest&nbsp;outline&nbsp;point,&nbsp;a&nbsp;negative&nbsp;value)</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-getname"><strong>getname</strong></a>(self)</dt><dd><tt>:return:&nbsp;A&nbsp;tuple&nbsp;of&nbsp;the&nbsp;font&nbsp;family&nbsp;(e.g.&nbsp;Helvetica)&nbsp;and&nbsp;the&nbsp;font&nbsp;style<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(e.g.&nbsp;Bold)</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-set_variation_by_axes"><strong>set_variation_by_axes</strong></a>(self, axes)</dt><dd><tt>:param&nbsp;axes:&nbsp;A&nbsp;list&nbsp;of&nbsp;values&nbsp;for&nbsp;each&nbsp;axis.<br>
+:exception&nbsp;OSError:&nbsp;If&nbsp;the&nbsp;font&nbsp;is&nbsp;not&nbsp;a&nbsp;variation&nbsp;font.</tt></dd></dl>
+
+<dl><dt><a name="FreeTypeFont-set_variation_by_name"><strong>set_variation_by_name</strong></a>(self, name)</dt><dd><tt>:param&nbsp;name:&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;style.<br>
+:exception&nbsp;OSError:&nbsp;If&nbsp;the&nbsp;font&nbsp;is&nbsp;not&nbsp;a&nbsp;variation&nbsp;font.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ImageFont">class <strong>ImageFont</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>PIL&nbsp;font&nbsp;wrapper<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ImageFont-getbbox"><strong>getbbox</strong></a>(self, text, *args, **kwargs)</dt><dd><tt>Returns&nbsp;bounding&nbsp;box&nbsp;(in&nbsp;pixels)&nbsp;of&nbsp;given&nbsp;text.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;9.2.0<br>
+&nbsp;<br>
+:param&nbsp;text:&nbsp;Text&nbsp;to&nbsp;render.<br>
+:param&nbsp;mode:&nbsp;Used&nbsp;by&nbsp;some&nbsp;graphics&nbsp;drivers&nbsp;to&nbsp;indicate&nbsp;what&nbsp;mode&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;driver&nbsp;prefers;&nbsp;if&nbsp;empty,&nbsp;the&nbsp;renderer&nbsp;may&nbsp;return&nbsp;either<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode.&nbsp;Note&nbsp;that&nbsp;the&nbsp;mode&nbsp;is&nbsp;always&nbsp;a&nbsp;string,&nbsp;to&nbsp;simplify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C-level&nbsp;implementations.<br>
+&nbsp;<br>
+:return:&nbsp;``(left,&nbsp;top,&nbsp;right,&nbsp;bottom)``&nbsp;bounding&nbsp;box</tt></dd></dl>
+
+<dl><dt><a name="ImageFont-getlength"><strong>getlength</strong></a>(self, text, *args, **kwargs)</dt><dd><tt>Returns&nbsp;length&nbsp;(in&nbsp;pixels)&nbsp;of&nbsp;given&nbsp;text.<br>
+This&nbsp;is&nbsp;the&nbsp;amount&nbsp;by&nbsp;which&nbsp;following&nbsp;text&nbsp;should&nbsp;be&nbsp;offset.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;9.2.0</tt></dd></dl>
+
+<dl><dt><a name="ImageFont-getmask"><strong>getmask</strong></a>(self, text, mode='', *args, **kwargs)</dt><dd><tt>Create&nbsp;a&nbsp;bitmap&nbsp;for&nbsp;the&nbsp;text.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;font&nbsp;uses&nbsp;antialiasing,&nbsp;the&nbsp;bitmap&nbsp;should&nbsp;have&nbsp;mode&nbsp;``L``&nbsp;and&nbsp;use&nbsp;a<br>
+maximum&nbsp;value&nbsp;of&nbsp;255.&nbsp;Otherwise,&nbsp;it&nbsp;should&nbsp;have&nbsp;mode&nbsp;``1``.<br>
+&nbsp;<br>
+:param&nbsp;text:&nbsp;Text&nbsp;to&nbsp;render.<br>
+:param&nbsp;mode:&nbsp;Used&nbsp;by&nbsp;some&nbsp;graphics&nbsp;drivers&nbsp;to&nbsp;indicate&nbsp;what&nbsp;mode&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;driver&nbsp;prefers;&nbsp;if&nbsp;empty,&nbsp;the&nbsp;renderer&nbsp;may&nbsp;return&nbsp;either<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mode.&nbsp;Note&nbsp;that&nbsp;the&nbsp;mode&nbsp;is&nbsp;always&nbsp;a&nbsp;string,&nbsp;to&nbsp;simplify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C-level&nbsp;implementations.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;1.1.5<br>
+&nbsp;<br>
+:return:&nbsp;An&nbsp;internal&nbsp;PIL&nbsp;storage&nbsp;memory&nbsp;instance&nbsp;as&nbsp;defined&nbsp;by&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:py:mod:`PIL.Image.core`&nbsp;interface&nbsp;module.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Layout">class <strong>Layout</strong></a>(<a href="enum.html#IntEnum">enum.IntEnum</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Layout">Layout</a>(value,&nbsp;names=None,&nbsp;*,&nbsp;module=None,&nbsp;qualname=None,&nbsp;type=None,&nbsp;start=1)<br>
+&nbsp;<br>
+An&nbsp;enumeration.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="PIL.ImageFont.html#Layout">Layout</a></dd>
+<dd><a href="enum.html#IntEnum">enum.IntEnum</a></dd>
+<dd><a href="builtins.html#int">builtins.int</a></dd>
+<dd><a href="enum.html#Enum">enum.Enum</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>BASIC</strong> = &lt;Layout.BASIC: 0&gt;</dl>
+
+<dl><dt><strong>RAQM</strong> = &lt;Layout.RAQM: 1&gt;</dl>
+
+<hr>
+Data descriptors inherited from <a href="enum.html#Enum">enum.Enum</a>:<br>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>The&nbsp;name&nbsp;of&nbsp;the&nbsp;Enum&nbsp;member.</tt></dd>
+</dl>
+<dl><dt><strong>value</strong></dt>
+<dd><tt>The&nbsp;value&nbsp;of&nbsp;the&nbsp;Enum&nbsp;member.</tt></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="enum.html#EnumMeta">enum.EnumMeta</a>:<br>
+<dl><dt><strong>__members__</strong></dt>
+<dd><tt>Returns&nbsp;a&nbsp;mapping&nbsp;of&nbsp;member&nbsp;name-&gt;value.<br>
+&nbsp;<br>
+This&nbsp;mapping&nbsp;lists&nbsp;all&nbsp;enum&nbsp;members,&nbsp;including&nbsp;aliases.&nbsp;Note&nbsp;that&nbsp;this<br>
+is&nbsp;a&nbsp;read-only&nbsp;view&nbsp;of&nbsp;the&nbsp;internal&nbsp;mapping.</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TransposedFont">class <strong>TransposedFont</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#TransposedFont">TransposedFont</a>(font,&nbsp;orientation=None)<br>
+&nbsp;<br>
+Wrapper&nbsp;for&nbsp;writing&nbsp;rotated&nbsp;or&nbsp;mirrored&nbsp;text<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="TransposedFont-__init__"><strong>__init__</strong></a>(self, font, orientation=None)</dt><dd><tt>Wrapper&nbsp;that&nbsp;creates&nbsp;a&nbsp;transposed&nbsp;font&nbsp;from&nbsp;any&nbsp;existing&nbsp;font<br>
+<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+:param&nbsp;font:&nbsp;A&nbsp;font&nbsp;<a href="builtins.html#object">object</a>.<br>
+:param&nbsp;orientation:&nbsp;An&nbsp;optional&nbsp;orientation.&nbsp;&nbsp;If&nbsp;given,&nbsp;this&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;one&nbsp;of&nbsp;Image.Transpose.FLIP_LEFT_RIGHT,&nbsp;Image.Transpose.FLIP_TOP_BOTTOM,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Image.Transpose.ROTATE_90,&nbsp;Image.Transpose.ROTATE_180,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Image.Transpose.ROTATE_270.</tt></dd></dl>
+
+<dl><dt><a name="TransposedFont-getbbox"><strong>getbbox</strong></a>(self, text, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="TransposedFont-getlength"><strong>getlength</strong></a>(self, text, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="TransposedFont-getmask"><strong>getmask</strong></a>(self, text, mode='', *args, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-load"><strong>load</strong></a>(filename)</dt><dd><tt>Load&nbsp;a&nbsp;font&nbsp;file.&nbsp;&nbsp;This&nbsp;function&nbsp;loads&nbsp;a&nbsp;font&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;the&nbsp;given<br>
+bitmap&nbsp;font&nbsp;file,&nbsp;and&nbsp;returns&nbsp;the&nbsp;corresponding&nbsp;font&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+:param&nbsp;filename:&nbsp;Name&nbsp;of&nbsp;font&nbsp;file.<br>
+:return:&nbsp;A&nbsp;font&nbsp;<a href="builtins.html#object">object</a>.<br>
+:exception&nbsp;OSError:&nbsp;If&nbsp;the&nbsp;file&nbsp;could&nbsp;not&nbsp;be&nbsp;read.</tt></dd></dl>
+ <dl><dt><a name="-load_default"><strong>load_default</strong></a>()</dt><dd><tt>Load&nbsp;a&nbsp;"better&nbsp;than&nbsp;nothing"&nbsp;default&nbsp;font.<br>
+&nbsp;<br>
+..&nbsp;versionadded::&nbsp;1.1.4<br>
+&nbsp;<br>
+:return:&nbsp;A&nbsp;font&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+ <dl><dt><a name="-load_path"><strong>load_path</strong></a>(filename)</dt><dd><tt>Load&nbsp;font&nbsp;file.&nbsp;Same&nbsp;as&nbsp;:py:func:`~PIL.<a href="#ImageFont">ImageFont</a>.load`,&nbsp;but&nbsp;searches&nbsp;for&nbsp;a<br>
+bitmap&nbsp;font&nbsp;along&nbsp;the&nbsp;Python&nbsp;path.<br>
+&nbsp;<br>
+:param&nbsp;filename:&nbsp;Name&nbsp;of&nbsp;font&nbsp;file.<br>
+:return:&nbsp;A&nbsp;font&nbsp;<a href="builtins.html#object">object</a>.<br>
+:exception&nbsp;OSError:&nbsp;If&nbsp;the&nbsp;file&nbsp;could&nbsp;not&nbsp;be&nbsp;read.</tt></dd></dl>
+ <dl><dt><a name="-truetype"><strong>truetype</strong></a>(font=None, size=10, index=0, encoding='', layout_engine=None)</dt><dd><tt>Load&nbsp;a&nbsp;TrueType&nbsp;or&nbsp;OpenType&nbsp;font&nbsp;from&nbsp;a&nbsp;file&nbsp;or&nbsp;file-like&nbsp;<a href="builtins.html#object">object</a>,<br>
+and&nbsp;create&nbsp;a&nbsp;font&nbsp;<a href="builtins.html#object">object</a>.<br>
+This&nbsp;function&nbsp;loads&nbsp;a&nbsp;font&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;the&nbsp;given&nbsp;file&nbsp;or&nbsp;file-like<br>
+<a href="builtins.html#object">object</a>,&nbsp;and&nbsp;creates&nbsp;a&nbsp;font&nbsp;<a href="builtins.html#object">object</a>&nbsp;for&nbsp;a&nbsp;font&nbsp;of&nbsp;the&nbsp;given&nbsp;size.<br>
+&nbsp;<br>
+Pillow&nbsp;uses&nbsp;FreeType&nbsp;to&nbsp;open&nbsp;font&nbsp;files.&nbsp;On&nbsp;Windows,&nbsp;be&nbsp;aware&nbsp;that&nbsp;FreeType<br>
+will&nbsp;keep&nbsp;the&nbsp;file&nbsp;open&nbsp;as&nbsp;long&nbsp;as&nbsp;the&nbsp;<a href="#FreeTypeFont">FreeTypeFont</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;exists.&nbsp;Windows<br>
+limits&nbsp;the&nbsp;number&nbsp;of&nbsp;files&nbsp;that&nbsp;can&nbsp;be&nbsp;open&nbsp;in&nbsp;C&nbsp;at&nbsp;once&nbsp;to&nbsp;512,&nbsp;so&nbsp;if&nbsp;many<br>
+fonts&nbsp;are&nbsp;opened&nbsp;simultaneously&nbsp;and&nbsp;that&nbsp;limit&nbsp;is&nbsp;approached,&nbsp;an<br>
+``OSError``&nbsp;may&nbsp;be&nbsp;thrown,&nbsp;reporting&nbsp;that&nbsp;FreeType&nbsp;"cannot&nbsp;open&nbsp;resource".<br>
+A&nbsp;workaround&nbsp;would&nbsp;be&nbsp;to&nbsp;copy&nbsp;the&nbsp;file(s)&nbsp;into&nbsp;memory,&nbsp;and&nbsp;open&nbsp;that&nbsp;instead.<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;requires&nbsp;the&nbsp;_imagingft&nbsp;service.<br>
+&nbsp;<br>
+:param&nbsp;font:&nbsp;A&nbsp;filename&nbsp;or&nbsp;file-like&nbsp;<a href="builtins.html#object">object</a>&nbsp;containing&nbsp;a&nbsp;TrueType&nbsp;font.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;file&nbsp;is&nbsp;not&nbsp;found&nbsp;in&nbsp;this&nbsp;filename,&nbsp;the&nbsp;loader&nbsp;may&nbsp;also<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search&nbsp;in&nbsp;other&nbsp;directories,&nbsp;such&nbsp;as&nbsp;the&nbsp;:file:`fonts/`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;on&nbsp;Windows&nbsp;or&nbsp;:file:`/Library/Fonts/`,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:file:`/System/Library/Fonts/`&nbsp;and&nbsp;:file:`~/Library/Fonts/`&nbsp;on<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;macOS.<br>
+&nbsp;<br>
+:param&nbsp;size:&nbsp;The&nbsp;requested&nbsp;size,&nbsp;in&nbsp;pixels.<br>
+:param&nbsp;index:&nbsp;Which&nbsp;font&nbsp;face&nbsp;to&nbsp;load&nbsp;(default&nbsp;is&nbsp;first&nbsp;available&nbsp;face).<br>
+:param&nbsp;encoding:&nbsp;Which&nbsp;font&nbsp;encoding&nbsp;to&nbsp;use&nbsp;(default&nbsp;is&nbsp;Unicode).&nbsp;Possible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encodings&nbsp;include&nbsp;(see&nbsp;the&nbsp;FreeType&nbsp;documentation&nbsp;for&nbsp;more<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;information):<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"unic"&nbsp;(Unicode)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"symb"&nbsp;(Microsoft&nbsp;Symbol)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"ADOB"&nbsp;(Adobe&nbsp;Standard)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"ADBE"&nbsp;(Adobe&nbsp;Expert)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"ADBC"&nbsp;(Adobe&nbsp;Custom)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"armn"&nbsp;(Apple&nbsp;Roman)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"sjis"&nbsp;(Shift&nbsp;JIS)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"gb&nbsp;&nbsp;"&nbsp;(PRC)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"big5"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"wans"&nbsp;(Extended&nbsp;Wansung)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"joha"&nbsp;(Johab)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;"lat1"&nbsp;(Latin-1)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;specifies&nbsp;the&nbsp;character&nbsp;set&nbsp;to&nbsp;use.&nbsp;It&nbsp;does&nbsp;not&nbsp;alter&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;of&nbsp;any&nbsp;text&nbsp;provided&nbsp;in&nbsp;subsequent&nbsp;operations.<br>
+:param&nbsp;layout_engine:&nbsp;Which&nbsp;layout&nbsp;engine&nbsp;to&nbsp;use,&nbsp;if&nbsp;available:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:data:`.<a href="#ImageFont">ImageFont</a>.<a href="#Layout">Layout</a>.BASIC`&nbsp;or&nbsp;:data:`.<a href="#ImageFont">ImageFont</a>.<a href="#Layout">Layout</a>.RAQM`.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;it&nbsp;is&nbsp;available,&nbsp;Raqm&nbsp;layout&nbsp;will&nbsp;be&nbsp;used&nbsp;by&nbsp;default.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Otherwise,&nbsp;basic&nbsp;layout&nbsp;will&nbsp;be&nbsp;used.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Raqm&nbsp;layout&nbsp;is&nbsp;recommended&nbsp;for&nbsp;all&nbsp;non-English&nbsp;text.&nbsp;If&nbsp;Raqm&nbsp;layout<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;required,&nbsp;basic&nbsp;layout&nbsp;will&nbsp;have&nbsp;better&nbsp;performance.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;can&nbsp;check&nbsp;support&nbsp;for&nbsp;Raqm&nbsp;layout&nbsp;using<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:py:func:`PIL.features.check_feature`&nbsp;with&nbsp;``feature="raqm"``.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;versionadded::&nbsp;4.2.0<br>
+:return:&nbsp;A&nbsp;font&nbsp;<a href="builtins.html#object">object</a>.<br>
+:exception&nbsp;OSError:&nbsp;If&nbsp;the&nbsp;file&nbsp;could&nbsp;not&nbsp;be&nbsp;read.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>MAX_STRING_LENGTH</strong> = 1000000</td></tr></table>
+</body></html>

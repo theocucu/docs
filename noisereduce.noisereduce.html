@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module noisereduce.noisereduce</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="noisereduce.html"><font color="#ffffff">noisereduce</font></a>.noisereduce</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cthcuc%5Cappdata%5Clocal%5Cprograms%5Cpython%5Cpython38%5Clib%5Csite-packages%5Cnoisereduce%5Cnoisereduce.py">c:\users\thcuc\appdata\local\programs\python\python38\lib\site-packages\noisereduce\noisereduce.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="librosa.html">librosa</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="scipy.html">scipy</a><br>
+</td><td width="25%" valign=top><a href="tempfile.html">tempfile</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="noisereduce.noisereduce.html#SpectralGate">SpectralGate</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="noisereduce.noisereduce.html#SpectralGateNonStationary">SpectralGateNonStationary</a>
+</font></dt><dt><font face="helvetica, arial"><a href="noisereduce.noisereduce.html#SpectralGateStationary">SpectralGateStationary</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpectralGate">class <strong>SpectralGate</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SpectralGate">SpectralGate</a>(y,&nbsp;sr,&nbsp;prop_decrease,&nbsp;chunk_size,&nbsp;padding,&nbsp;n_fft,&nbsp;win_length,&nbsp;hop_length,&nbsp;time_constant_s,&nbsp;freq_mask_smooth_hz,&nbsp;time_mask_smooth_ms,&nbsp;tmp_folder,&nbsp;use_tqdm,&nbsp;n_jobs)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SpectralGate-__init__"><strong>__init__</strong></a>(self, y, sr, prop_decrease, chunk_size, padding, n_fft, win_length, hop_length, time_constant_s, freq_mask_smooth_hz, time_mask_smooth_ms, tmp_folder, use_tqdm, n_jobs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="SpectralGate-filter_chunk"><strong>filter_chunk</strong></a>(self, start_frame, end_frame)</dt><dd><tt>Pad&nbsp;and&nbsp;perform&nbsp;filtering</tt></dd></dl>
+
+<dl><dt><a name="SpectralGate-get_traces"><strong>get_traces</strong></a>(self, start_frame=None, end_frame=None)</dt><dd><tt>Grab&nbsp;filtered&nbsp;data&nbsp;iterating&nbsp;over&nbsp;chunks</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpectralGateNonStationary">class <strong>SpectralGateNonStationary</strong></a>(<a href="noisereduce.noisereduce.html#SpectralGate">SpectralGate</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SpectralGateNonStationary">SpectralGateNonStationary</a>(y,&nbsp;sr,&nbsp;chunk_size,&nbsp;padding,&nbsp;n_fft,&nbsp;win_length,&nbsp;hop_length,&nbsp;time_constant_s,&nbsp;freq_mask_smooth_hz,&nbsp;time_mask_smooth_ms,&nbsp;thresh_n_mult_nonstationary,&nbsp;sigmoid_slope_nonstationary,&nbsp;tmp_folder,&nbsp;prop_decrease,&nbsp;use_tqdm,&nbsp;n_jobs)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="noisereduce.noisereduce.html#SpectralGateNonStationary">SpectralGateNonStationary</a></dd>
+<dd><a href="noisereduce.noisereduce.html#SpectralGate">SpectralGate</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SpectralGateNonStationary-__init__"><strong>__init__</strong></a>(self, y, sr, chunk_size, padding, n_fft, win_length, hop_length, time_constant_s, freq_mask_smooth_hz, time_mask_smooth_ms, thresh_n_mult_nonstationary, sigmoid_slope_nonstationary, tmp_folder, prop_decrease, use_tqdm, n_jobs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="SpectralGateNonStationary-spectral_gating_nonstationary"><strong>spectral_gating_nonstationary</strong></a>(self, chunk)</dt><dd><tt>non-stationary&nbsp;version&nbsp;of&nbsp;spectral&nbsp;gating</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="noisereduce.noisereduce.html#SpectralGate">SpectralGate</a>:<br>
+<dl><dt><a name="SpectralGateNonStationary-filter_chunk"><strong>filter_chunk</strong></a>(self, start_frame, end_frame)</dt><dd><tt>Pad&nbsp;and&nbsp;perform&nbsp;filtering</tt></dd></dl>
+
+<dl><dt><a name="SpectralGateNonStationary-get_traces"><strong>get_traces</strong></a>(self, start_frame=None, end_frame=None)</dt><dd><tt>Grab&nbsp;filtered&nbsp;data&nbsp;iterating&nbsp;over&nbsp;chunks</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="noisereduce.noisereduce.html#SpectralGate">SpectralGate</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpectralGateStationary">class <strong>SpectralGateStationary</strong></a>(<a href="noisereduce.noisereduce.html#SpectralGate">SpectralGate</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SpectralGateStationary">SpectralGateStationary</a>(y,&nbsp;sr,&nbsp;y_noise,&nbsp;n_std_thresh_stationary,&nbsp;chunk_size,&nbsp;clip_noise_stationary,&nbsp;padding,&nbsp;n_fft,&nbsp;win_length,&nbsp;hop_length,&nbsp;time_constant_s,&nbsp;freq_mask_smooth_hz,&nbsp;time_mask_smooth_ms,&nbsp;tmp_folder,&nbsp;prop_decrease,&nbsp;use_tqdm,&nbsp;n_jobs)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="noisereduce.noisereduce.html#SpectralGateStationary">SpectralGateStationary</a></dd>
+<dd><a href="noisereduce.noisereduce.html#SpectralGate">SpectralGate</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SpectralGateStationary-__init__"><strong>__init__</strong></a>(self, y, sr, y_noise, n_std_thresh_stationary, chunk_size, clip_noise_stationary, padding, n_fft, win_length, hop_length, time_constant_s, freq_mask_smooth_hz, time_mask_smooth_ms, tmp_folder, prop_decrease, use_tqdm, n_jobs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="SpectralGateStationary-spectral_gating_stationary"><strong>spectral_gating_stationary</strong></a>(self, chunk)</dt><dd><tt>non-stationary&nbsp;version&nbsp;of&nbsp;spectral&nbsp;gating</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="noisereduce.noisereduce.html#SpectralGate">SpectralGate</a>:<br>
+<dl><dt><a name="SpectralGateStationary-filter_chunk"><strong>filter_chunk</strong></a>(self, start_frame, end_frame)</dt><dd><tt>Pad&nbsp;and&nbsp;perform&nbsp;filtering</tt></dd></dl>
+
+<dl><dt><a name="SpectralGateStationary-get_traces"><strong>get_traces</strong></a>(self, start_frame=None, end_frame=None)</dt><dd><tt>Grab&nbsp;filtered&nbsp;data&nbsp;iterating&nbsp;over&nbsp;chunks</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="noisereduce.noisereduce.html#SpectralGate">SpectralGate</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_time_smoothed_representation"><strong>get_time_smoothed_representation</strong></a>(spectral, samplerate, hop_length, time_constant_s=0.001)</dt></dl>
+ <dl><dt><a name="-reduce_noise"><strong>reduce_noise</strong></a>(y, sr, stationary=False, y_noise=None, prop_decrease=1.0, time_constant_s=2.0, freq_mask_smooth_hz=500, time_mask_smooth_ms=50, thresh_n_mult_nonstationary=2, sigmoid_slope_nonstationary=10, n_std_thresh_stationary=1.5, tmp_folder=None, chunk_size=600000, padding=30000, n_fft=1024, win_length=None, hop_length=None, clip_noise_stationary=True, use_tqdm=False, n_jobs=1)</dt><dd><tt>Reduce&nbsp;noise&nbsp;via&nbsp;spectral&nbsp;gating.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+y&nbsp;:&nbsp;np.ndarray&nbsp;[shape=(#&nbsp;frames,)&nbsp;or&nbsp;(#&nbsp;channels,&nbsp;#&nbsp;frames)],&nbsp;real-valued<br>
+&nbsp;&nbsp;&nbsp;&nbsp;input&nbsp;signal<br>
+sr&nbsp;:&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sample&nbsp;rate&nbsp;of&nbsp;input&nbsp;signal&nbsp;/&nbsp;noise&nbsp;signal<br>
+y_noise&nbsp;:&nbsp;np.ndarray&nbsp;[shape=(#&nbsp;frames,)&nbsp;or&nbsp;(#&nbsp;channels,&nbsp;#&nbsp;frames)],&nbsp;real-valued<br>
+&nbsp;&nbsp;&nbsp;&nbsp;noise&nbsp;signal&nbsp;to&nbsp;compute&nbsp;statistics&nbsp;over&nbsp;(only&nbsp;for&nbsp;non-stationary&nbsp;noise&nbsp;reduction).<br>
+stationary&nbsp;:&nbsp;bool,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Whether&nbsp;to&nbsp;perform&nbsp;stationary,&nbsp;or&nbsp;non-stationary&nbsp;noise&nbsp;reduction,&nbsp;by&nbsp;default&nbsp;False<br>
+prop_decrease&nbsp;:&nbsp;float,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;proportion&nbsp;to&nbsp;reduce&nbsp;the&nbsp;noise&nbsp;by&nbsp;(1.0&nbsp;=&nbsp;100%),&nbsp;by&nbsp;default&nbsp;1.0<br>
+time_constant_s&nbsp;:&nbsp;float,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;time&nbsp;constant,&nbsp;in&nbsp;seconds,&nbsp;to&nbsp;compute&nbsp;the&nbsp;noise&nbsp;floor&nbsp;in&nbsp;the&nbsp;non-stationary<br>
+&nbsp;&nbsp;&nbsp;&nbsp;algorithm,&nbsp;by&nbsp;default&nbsp;2.0<br>
+freq_mask_smooth_hz&nbsp;:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;frequency&nbsp;range&nbsp;to&nbsp;smooth&nbsp;the&nbsp;mask&nbsp;over&nbsp;in&nbsp;Hz,&nbsp;by&nbsp;default&nbsp;500<br>
+time_mask_smooth_ms&nbsp;:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;time&nbsp;range&nbsp;to&nbsp;smooth&nbsp;the&nbsp;mask&nbsp;over&nbsp;in&nbsp;milliseconds,&nbsp;by&nbsp;default&nbsp;50<br>
+thresh_n_mult_nonstationary&nbsp;:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Only&nbsp;used&nbsp;in&nbsp;nonstationary&nbsp;noise&nbsp;reduction.,&nbsp;by&nbsp;default&nbsp;1<br>
+sigmoid_slope_nonstationary&nbsp;:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Only&nbsp;used&nbsp;in&nbsp;nonstationary&nbsp;noise&nbsp;reduction.,&nbsp;by&nbsp;default&nbsp;10<br>
+n_std_thresh_stationary&nbsp;:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;standard&nbsp;deviations&nbsp;above&nbsp;mean&nbsp;to&nbsp;place&nbsp;the&nbsp;threshold&nbsp;between<br>
+&nbsp;&nbsp;&nbsp;&nbsp;signal&nbsp;and&nbsp;noise.,&nbsp;by&nbsp;default&nbsp;1.5<br>
+tmp_folder&nbsp;:&nbsp;[type],&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Temp&nbsp;folder&nbsp;to&nbsp;write&nbsp;waveform&nbsp;to&nbsp;during&nbsp;parallel&nbsp;processing.&nbsp;Defaults&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;temp&nbsp;folder&nbsp;for&nbsp;python.,&nbsp;by&nbsp;default&nbsp;None<br>
+chunk_size&nbsp;:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Size&nbsp;of&nbsp;signal&nbsp;chunks&nbsp;to&nbsp;reduce&nbsp;noise&nbsp;over.&nbsp;Larger&nbsp;sizes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;take&nbsp;more&nbsp;space&nbsp;in&nbsp;memory,&nbsp;smaller&nbsp;sizes&nbsp;can&nbsp;take&nbsp;longer&nbsp;to&nbsp;compute.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;,&nbsp;by&nbsp;default&nbsp;60000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;padding&nbsp;:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;How&nbsp;much&nbsp;to&nbsp;pad&nbsp;each&nbsp;chunk&nbsp;of&nbsp;signal&nbsp;by.&nbsp;Larger&nbsp;pads&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;needed&nbsp;for&nbsp;larger&nbsp;time&nbsp;constants.,&nbsp;by&nbsp;default&nbsp;30000<br>
+n_fft&nbsp;:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;length&nbsp;of&nbsp;the&nbsp;windowed&nbsp;signal&nbsp;after&nbsp;padding&nbsp;with&nbsp;zeros.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;number&nbsp;of&nbsp;rows&nbsp;in&nbsp;the&nbsp;STFT&nbsp;matrix&nbsp;``D``&nbsp;is&nbsp;``(1&nbsp;+&nbsp;n_fft/2)``.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;default&nbsp;value,&nbsp;``n_fft=2048``&nbsp;samples,&nbsp;corresponds&nbsp;to&nbsp;a&nbsp;physical<br>
+&nbsp;&nbsp;&nbsp;&nbsp;duration&nbsp;of&nbsp;93&nbsp;milliseconds&nbsp;at&nbsp;a&nbsp;sample&nbsp;rate&nbsp;of&nbsp;22050&nbsp;Hz,&nbsp;i.e.&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;sample&nbsp;rate&nbsp;in&nbsp;librosa.&nbsp;This&nbsp;value&nbsp;is&nbsp;well&nbsp;adapted&nbsp;for&nbsp;music<br>
+&nbsp;&nbsp;&nbsp;&nbsp;signals.&nbsp;However,&nbsp;in&nbsp;speech&nbsp;processing,&nbsp;the&nbsp;recommended&nbsp;value&nbsp;is&nbsp;512,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;corresponding&nbsp;to&nbsp;23&nbsp;milliseconds&nbsp;at&nbsp;a&nbsp;sample&nbsp;rate&nbsp;of&nbsp;22050&nbsp;Hz.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;any&nbsp;case,&nbsp;we&nbsp;recommend&nbsp;setting&nbsp;``n_fft``&nbsp;to&nbsp;a&nbsp;power&nbsp;of&nbsp;two&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;optimizing&nbsp;the&nbsp;speed&nbsp;of&nbsp;the&nbsp;fast&nbsp;Fourier&nbsp;transform&nbsp;(FFT)&nbsp;algorithm.,&nbsp;by&nbsp;default&nbsp;1024<br>
+win_length&nbsp;:&nbsp;[type],&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Each&nbsp;frame&nbsp;of&nbsp;audio&nbsp;is&nbsp;windowed&nbsp;by&nbsp;``window``&nbsp;of&nbsp;length&nbsp;``win_length``<br>
+&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;padded&nbsp;with&nbsp;zeros&nbsp;to&nbsp;match&nbsp;``n_fft``.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Smaller&nbsp;values&nbsp;improve&nbsp;the&nbsp;temporal&nbsp;resolution&nbsp;of&nbsp;the&nbsp;STFT&nbsp;(i.e.&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ability&nbsp;to&nbsp;discriminate&nbsp;impulses&nbsp;that&nbsp;are&nbsp;closely&nbsp;spaced&nbsp;in&nbsp;time)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;at&nbsp;the&nbsp;expense&nbsp;of&nbsp;frequency&nbsp;resolution&nbsp;(i.e.&nbsp;the&nbsp;ability&nbsp;to&nbsp;discriminate<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pure&nbsp;tones&nbsp;that&nbsp;are&nbsp;closely&nbsp;spaced&nbsp;in&nbsp;frequency).&nbsp;This&nbsp;effect&nbsp;is&nbsp;known<br>
+&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;the&nbsp;time-frequency&nbsp;localization&nbsp;trade-off&nbsp;and&nbsp;needs&nbsp;to&nbsp;be&nbsp;adjusted<br>
+&nbsp;&nbsp;&nbsp;&nbsp;according&nbsp;to&nbsp;the&nbsp;properties&nbsp;of&nbsp;the&nbsp;input&nbsp;signal&nbsp;``y``.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;unspecified,&nbsp;defaults&nbsp;to&nbsp;``win_length&nbsp;=&nbsp;n_fft``.,&nbsp;by&nbsp;default&nbsp;None<br>
+hop_length&nbsp;:&nbsp;[type],&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;of&nbsp;audio&nbsp;samples&nbsp;between&nbsp;adjacent&nbsp;STFT&nbsp;columns.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Smaller&nbsp;values&nbsp;increase&nbsp;the&nbsp;number&nbsp;of&nbsp;columns&nbsp;in&nbsp;``D``&nbsp;without<br>
+&nbsp;&nbsp;&nbsp;&nbsp;affecting&nbsp;the&nbsp;frequency&nbsp;resolution&nbsp;of&nbsp;the&nbsp;STFT.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;unspecified,&nbsp;defaults&nbsp;to&nbsp;``win_length&nbsp;//&nbsp;4``&nbsp;(see&nbsp;below).,&nbsp;by&nbsp;default&nbsp;None<br>
+use_tqdm&nbsp;:&nbsp;bool,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Whether&nbsp;to&nbsp;show&nbsp;tqdm&nbsp;progress&nbsp;bar,&nbsp;by&nbsp;default&nbsp;False<br>
+n_jobs&nbsp;:&nbsp;int,&nbsp;optional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;parallel&nbsp;jobs&nbsp;to&nbsp;run.&nbsp;Set&nbsp;at&nbsp;-1&nbsp;to&nbsp;use&nbsp;all&nbsp;CPU&nbsp;cores,&nbsp;by&nbsp;default&nbsp;1</tt></dd></dl>
+ <dl><dt><a name="-sigmoid"><strong>sigmoid</strong></a>(x, shift, mult)</dt><dd><tt>Using&nbsp;this&nbsp;sigmoid&nbsp;to&nbsp;discourage&nbsp;one&nbsp;network&nbsp;overpowering&nbsp;the&nbsp;other</tt></dd></dl>
+</td></tr></table>
+</body></html>

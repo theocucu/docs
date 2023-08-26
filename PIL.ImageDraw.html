@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module PIL.ImageDraw</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="PIL.html"><font color="#ffffff">PIL</font></a>.ImageDraw</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cthcuc%5Cappdata%5Clocal%5Cprograms%5Cpython%5Cpython38%5Clib%5Csite-packages%5Cpil%5Cimagedraw.py">c:\users\thcuc\appdata\local\programs\python\python38\lib\site-packages\pil\imagedraw.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;The&nbsp;Python&nbsp;Imaging&nbsp;Library<br>
+#&nbsp;$Id$<br>
+#<br>
+#&nbsp;drawing&nbsp;interface&nbsp;operations<br>
+#<br>
+#&nbsp;History:<br>
+#&nbsp;1996-04-13&nbsp;fl&nbsp;&nbsp;&nbsp;Created&nbsp;(experimental)<br>
+#&nbsp;1996-08-07&nbsp;fl&nbsp;&nbsp;&nbsp;Filled&nbsp;polygons,&nbsp;ellipses.<br>
+#&nbsp;1996-08-13&nbsp;fl&nbsp;&nbsp;&nbsp;Added&nbsp;text&nbsp;support<br>
+#&nbsp;1998-06-28&nbsp;fl&nbsp;&nbsp;&nbsp;Handle&nbsp;I&nbsp;and&nbsp;F&nbsp;images<br>
+#&nbsp;1998-12-29&nbsp;fl&nbsp;&nbsp;&nbsp;Added&nbsp;arc;&nbsp;use&nbsp;arc&nbsp;primitive&nbsp;to&nbsp;draw&nbsp;ellipses<br>
+#&nbsp;1999-01-10&nbsp;fl&nbsp;&nbsp;&nbsp;Added&nbsp;shape&nbsp;stuff&nbsp;(experimental)<br>
+#&nbsp;1999-02-06&nbsp;fl&nbsp;&nbsp;&nbsp;Added&nbsp;bitmap&nbsp;support<br>
+#&nbsp;1999-02-11&nbsp;fl&nbsp;&nbsp;&nbsp;Changed&nbsp;all&nbsp;primitives&nbsp;to&nbsp;take&nbsp;options<br>
+#&nbsp;1999-02-20&nbsp;fl&nbsp;&nbsp;&nbsp;Fixed&nbsp;backwards&nbsp;compatibility<br>
+#&nbsp;2000-10-12&nbsp;fl&nbsp;&nbsp;&nbsp;Copy&nbsp;on&nbsp;write,&nbsp;when&nbsp;necessary<br>
+#&nbsp;2001-02-18&nbsp;fl&nbsp;&nbsp;&nbsp;Use&nbsp;default&nbsp;ink&nbsp;for&nbsp;bitmap/text&nbsp;also&nbsp;in&nbsp;fill&nbsp;mode<br>
+#&nbsp;2002-10-24&nbsp;fl&nbsp;&nbsp;&nbsp;Added&nbsp;support&nbsp;for&nbsp;CSS-style&nbsp;color&nbsp;strings<br>
+#&nbsp;2002-12-10&nbsp;fl&nbsp;&nbsp;&nbsp;Added&nbsp;experimental&nbsp;support&nbsp;for&nbsp;RGBA-on-RGB&nbsp;drawing<br>
+#&nbsp;2002-12-11&nbsp;fl&nbsp;&nbsp;&nbsp;Refactored&nbsp;low-level&nbsp;drawing&nbsp;API&nbsp;(work&nbsp;in&nbsp;progress)<br>
+#&nbsp;2004-08-26&nbsp;fl&nbsp;&nbsp;&nbsp;Made&nbsp;<a href="#-Draw">Draw</a>()&nbsp;a&nbsp;factory&nbsp;function,&nbsp;added&nbsp;<a href="#-getdraw">getdraw</a>()&nbsp;support<br>
+#&nbsp;2004-09-04&nbsp;fl&nbsp;&nbsp;&nbsp;Added&nbsp;width&nbsp;support&nbsp;to&nbsp;line&nbsp;primitive<br>
+#&nbsp;2004-09-10&nbsp;fl&nbsp;&nbsp;&nbsp;Added&nbsp;font&nbsp;mode&nbsp;handling<br>
+#&nbsp;2006-06-19&nbsp;fl&nbsp;&nbsp;&nbsp;Added&nbsp;font&nbsp;bearing&nbsp;support&nbsp;(getmask2)<br>
+#<br>
+#&nbsp;Copyright&nbsp;(c)&nbsp;1997-2006&nbsp;by&nbsp;Secret&nbsp;Labs&nbsp;AB<br>
+#&nbsp;Copyright&nbsp;(c)&nbsp;1996-2006&nbsp;by&nbsp;Fredrik&nbsp;Lundh<br>
+#<br>
+#&nbsp;See&nbsp;the&nbsp;README&nbsp;file&nbsp;for&nbsp;information&nbsp;on&nbsp;usage&nbsp;and&nbsp;redistribution.<br>
+#</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="PIL.Image.html">PIL.Image</a><br>
+</td><td width="25%" valign=top><a href="PIL.ImageColor.html">PIL.ImageColor</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="numbers.html">numbers</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="PIL.ImageDraw.html#ImageDraw">ImageDraw</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ImageDraw">class <strong>ImageDraw</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#ImageDraw">ImageDraw</a>(im,&nbsp;mode=None)<br>
+&nbsp;<br>
+<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ImageDraw-__init__"><strong>__init__</strong></a>(self, im, mode=None)</dt><dd><tt>Create&nbsp;a&nbsp;drawing&nbsp;instance.<br>
+&nbsp;<br>
+:param&nbsp;im:&nbsp;The&nbsp;image&nbsp;to&nbsp;draw&nbsp;in.<br>
+:param&nbsp;mode:&nbsp;Optional&nbsp;mode&nbsp;to&nbsp;use&nbsp;for&nbsp;color&nbsp;values.&nbsp;&nbsp;For&nbsp;RGB<br>
+&nbsp;&nbsp;&nbsp;images,&nbsp;this&nbsp;argument&nbsp;can&nbsp;be&nbsp;RGB&nbsp;or&nbsp;RGBA&nbsp;(to&nbsp;blend&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;drawing&nbsp;into&nbsp;the&nbsp;image).&nbsp;&nbsp;For&nbsp;all&nbsp;other&nbsp;modes,&nbsp;this&nbsp;argument<br>
+&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;the&nbsp;image&nbsp;mode.&nbsp;&nbsp;If&nbsp;omitted,&nbsp;the&nbsp;mode<br>
+&nbsp;&nbsp;&nbsp;defaults&nbsp;to&nbsp;the&nbsp;mode&nbsp;of&nbsp;the&nbsp;image.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-arc"><strong>arc</strong></a>(self, xy, start, end, fill=None, width=1)</dt><dd><tt>Draw&nbsp;an&nbsp;arc.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-bitmap"><strong>bitmap</strong></a>(self, xy, bitmap, fill=None)</dt><dd><tt>Draw&nbsp;a&nbsp;bitmap.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-chord"><strong>chord</strong></a>(self, xy, start, end, fill=None, outline=None, width=1)</dt><dd><tt>Draw&nbsp;a&nbsp;chord.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-ellipse"><strong>ellipse</strong></a>(self, xy, fill=None, outline=None, width=1)</dt><dd><tt>Draw&nbsp;an&nbsp;ellipse.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-getfont"><strong>getfont</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;current&nbsp;default&nbsp;font.<br>
+&nbsp;<br>
+To&nbsp;set&nbsp;the&nbsp;default&nbsp;font&nbsp;for&nbsp;this&nbsp;<a href="#ImageDraw">ImageDraw</a>&nbsp;instance::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;PIL&nbsp;import&nbsp;<a href="#ImageDraw">ImageDraw</a>,&nbsp;ImageFont<br>
+&nbsp;&nbsp;&nbsp;&nbsp;draw.font&nbsp;=&nbsp;ImageFont.truetype("Tests/fonts/FreeMono.ttf")<br>
+&nbsp;<br>
+To&nbsp;set&nbsp;the&nbsp;default&nbsp;font&nbsp;for&nbsp;all&nbsp;future&nbsp;<a href="#ImageDraw">ImageDraw</a>&nbsp;instances::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;PIL&nbsp;import&nbsp;<a href="#ImageDraw">ImageDraw</a>,&nbsp;ImageFont<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ImageDraw">ImageDraw</a>.<a href="#ImageDraw">ImageDraw</a>.font&nbsp;=&nbsp;ImageFont.truetype("Tests/fonts/FreeMono.ttf")<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;current&nbsp;default&nbsp;font&nbsp;is&nbsp;``None``,<br>
+it&nbsp;is&nbsp;initialized&nbsp;with&nbsp;``ImageFont.load_default()``.<br>
+&nbsp;<br>
+:returns:&nbsp;An&nbsp;image&nbsp;font.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-line"><strong>line</strong></a>(self, xy, fill=None, width=0, joint=None)</dt><dd><tt>Draw&nbsp;a&nbsp;line,&nbsp;or&nbsp;a&nbsp;connected&nbsp;sequence&nbsp;of&nbsp;line&nbsp;segments.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-multiline_text"><strong>multiline_text</strong></a>(self, xy, text, fill=None, font=None, anchor=None, spacing=4, align='left', direction=None, features=None, language=None, stroke_width=0, stroke_fill=None, embedded_color=False)</dt></dl>
+
+<dl><dt><a name="ImageDraw-multiline_textbbox"><strong>multiline_textbbox</strong></a>(self, xy, text, font=None, anchor=None, spacing=4, align='left', direction=None, features=None, language=None, stroke_width=0, embedded_color=False)</dt></dl>
+
+<dl><dt><a name="ImageDraw-pieslice"><strong>pieslice</strong></a>(self, xy, start, end, fill=None, outline=None, width=1)</dt><dd><tt>Draw&nbsp;a&nbsp;pieslice.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-point"><strong>point</strong></a>(self, xy, fill=None)</dt><dd><tt>Draw&nbsp;one&nbsp;or&nbsp;more&nbsp;individual&nbsp;pixels.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-polygon"><strong>polygon</strong></a>(self, xy, fill=None, outline=None, width=1)</dt><dd><tt>Draw&nbsp;a&nbsp;polygon.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-rectangle"><strong>rectangle</strong></a>(self, xy, fill=None, outline=None, width=1)</dt><dd><tt>Draw&nbsp;a&nbsp;rectangle.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-regular_polygon"><strong>regular_polygon</strong></a>(self, bounding_circle, n_sides, rotation=0, fill=None, outline=None, width=1)</dt><dd><tt>Draw&nbsp;a&nbsp;regular&nbsp;polygon.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-rounded_rectangle"><strong>rounded_rectangle</strong></a>(self, xy, radius=0, fill=None, outline=None, width=1, *, corners=None)</dt><dd><tt>Draw&nbsp;a&nbsp;rounded&nbsp;rectangle.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-shape"><strong>shape</strong></a>(self, shape, fill=None, outline=None)</dt><dd><tt>(Experimental)&nbsp;Draw&nbsp;a&nbsp;shape.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-text"><strong>text</strong></a>(self, xy, text, fill=None, font=None, anchor=None, spacing=4, align='left', direction=None, features=None, language=None, stroke_width=0, stroke_fill=None, embedded_color=False, *args, **kwargs)</dt><dd><tt>Draw&nbsp;text.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-textbbox"><strong>textbbox</strong></a>(self, xy, text, font=None, anchor=None, spacing=4, align='left', direction=None, features=None, language=None, stroke_width=0, embedded_color=False)</dt><dd><tt>Get&nbsp;the&nbsp;bounding&nbsp;box&nbsp;of&nbsp;a&nbsp;given&nbsp;string,&nbsp;in&nbsp;pixels.</tt></dd></dl>
+
+<dl><dt><a name="ImageDraw-textlength"><strong>textlength</strong></a>(self, text, font=None, direction=None, features=None, language=None, embedded_color=False)</dt><dd><tt>Get&nbsp;the&nbsp;length&nbsp;of&nbsp;a&nbsp;given&nbsp;string,&nbsp;in&nbsp;pixels&nbsp;with&nbsp;1/64&nbsp;precision.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>font</strong> = None</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-Draw"><strong>Draw</strong></a>(im, mode=None)</dt><dd><tt>A&nbsp;simple&nbsp;2D&nbsp;drawing&nbsp;interface&nbsp;for&nbsp;PIL&nbsp;images.<br>
+&nbsp;<br>
+:param&nbsp;im:&nbsp;The&nbsp;image&nbsp;to&nbsp;draw&nbsp;in.<br>
+:param&nbsp;mode:&nbsp;Optional&nbsp;mode&nbsp;to&nbsp;use&nbsp;for&nbsp;color&nbsp;values.&nbsp;&nbsp;For&nbsp;RGB<br>
+&nbsp;&nbsp;&nbsp;images,&nbsp;this&nbsp;argument&nbsp;can&nbsp;be&nbsp;RGB&nbsp;or&nbsp;RGBA&nbsp;(to&nbsp;blend&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;drawing&nbsp;into&nbsp;the&nbsp;image).&nbsp;&nbsp;For&nbsp;all&nbsp;other&nbsp;modes,&nbsp;this&nbsp;argument<br>
+&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;the&nbsp;image&nbsp;mode.&nbsp;&nbsp;If&nbsp;omitted,&nbsp;the&nbsp;mode<br>
+&nbsp;&nbsp;&nbsp;defaults&nbsp;to&nbsp;the&nbsp;mode&nbsp;of&nbsp;the&nbsp;image.</tt></dd></dl>
+ <dl><dt><a name="-Outline"><strong>Outline</strong></a> = outline(...)</dt></dl>
+ <dl><dt><a name="-floodfill"><strong>floodfill</strong></a>(image, xy, value, border=None, thresh=0)</dt><dd><tt>(experimental)&nbsp;Fills&nbsp;a&nbsp;bounded&nbsp;region&nbsp;with&nbsp;a&nbsp;given&nbsp;color.<br>
+&nbsp;<br>
+:param&nbsp;image:&nbsp;Target&nbsp;image.<br>
+:param&nbsp;xy:&nbsp;Seed&nbsp;position&nbsp;(a&nbsp;2-item&nbsp;coordinate&nbsp;tuple).&nbsp;See<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:ref:`coordinate-system`.<br>
+:param&nbsp;value:&nbsp;Fill&nbsp;color.<br>
+:param&nbsp;border:&nbsp;Optional&nbsp;border&nbsp;value.&nbsp;&nbsp;If&nbsp;given,&nbsp;the&nbsp;region&nbsp;consists&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pixels&nbsp;with&nbsp;a&nbsp;color&nbsp;different&nbsp;from&nbsp;the&nbsp;border&nbsp;color.&nbsp;&nbsp;If&nbsp;not&nbsp;given,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;region&nbsp;consists&nbsp;of&nbsp;pixels&nbsp;having&nbsp;the&nbsp;same&nbsp;color&nbsp;as&nbsp;the&nbsp;seed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pixel.<br>
+:param&nbsp;thresh:&nbsp;Optional&nbsp;threshold&nbsp;value&nbsp;which&nbsp;specifies&nbsp;a&nbsp;maximum<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tolerable&nbsp;difference&nbsp;of&nbsp;a&nbsp;pixel&nbsp;value&nbsp;from&nbsp;the&nbsp;'background'&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;for&nbsp;it&nbsp;to&nbsp;be&nbsp;replaced.&nbsp;Useful&nbsp;for&nbsp;filling&nbsp;regions&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;non-homogeneous,&nbsp;but&nbsp;similar,&nbsp;colors.</tt></dd></dl>
+ <dl><dt><a name="-getdraw"><strong>getdraw</strong></a>(im=None, hints=None)</dt><dd><tt>(Experimental)&nbsp;A&nbsp;more&nbsp;advanced&nbsp;2D&nbsp;drawing&nbsp;interface&nbsp;for&nbsp;PIL&nbsp;images,<br>
+based&nbsp;on&nbsp;the&nbsp;WCK&nbsp;interface.<br>
+&nbsp;<br>
+:param&nbsp;im:&nbsp;The&nbsp;image&nbsp;to&nbsp;draw&nbsp;in.<br>
+:param&nbsp;hints:&nbsp;An&nbsp;optional&nbsp;list&nbsp;of&nbsp;hints.<br>
+:returns:&nbsp;A&nbsp;(drawing&nbsp;context,&nbsp;drawing&nbsp;resource&nbsp;factory)&nbsp;tuple.</tt></dd></dl>
+</td></tr></table>
+</body></html>

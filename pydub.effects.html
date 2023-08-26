@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pydub.effects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pydub.html"><font color="#ffffff">pydub</font></a>.effects</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cthcuc%5Cappdata%5Clocal%5Cprograms%5Cpython%5Cpython38%5Clib%5Csite-packages%5Cpydub%5Ceffects.py">c:\users\thcuc\appdata\local\programs\python\python38\lib\site-packages\pydub\effects.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="array.html">array</a><br>
+</td><td width="25%" valign=top><a href="audioop.html">audioop</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-apply_gain_stereo"><strong>apply_gain_stereo</strong></a>(seg, left_gain=0.0, right_gain=0.0)</dt><dd><tt>left_gain&nbsp;-&nbsp;amount&nbsp;of&nbsp;gain&nbsp;to&nbsp;apply&nbsp;to&nbsp;the&nbsp;left&nbsp;channel&nbsp;(in&nbsp;dB)<br>
+right_gain&nbsp;-&nbsp;amount&nbsp;of&nbsp;gain&nbsp;to&nbsp;apply&nbsp;to&nbsp;the&nbsp;right&nbsp;channel&nbsp;(in&nbsp;dB)<br>
+&nbsp;<br>
+note:&nbsp;mono&nbsp;audio&nbsp;segments&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;stereo</tt></dd></dl>
+ <dl><dt><a name="-apply_mono_filter_to_each_channel"><strong>apply_mono_filter_to_each_channel</strong></a>(seg, filter_fn)</dt></dl>
+ <dl><dt><a name="-compress_dynamic_range"><strong>compress_dynamic_range</strong></a>(seg, threshold=-20.0, ratio=4.0, attack=5.0, release=50.0)</dt><dd><tt>Keyword&nbsp;Arguments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;threshold&nbsp;-&nbsp;default:&nbsp;-20.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Threshold&nbsp;in&nbsp;dBFS.&nbsp;default&nbsp;of&nbsp;-20.0&nbsp;means&nbsp;-20dB&nbsp;relative&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum&nbsp;possible&nbsp;volume.&nbsp;0dBFS&nbsp;is&nbsp;the&nbsp;maximum&nbsp;possible&nbsp;value&nbsp;so<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all&nbsp;values&nbsp;for&nbsp;this&nbsp;argument&nbsp;sould&nbsp;be&nbsp;negative.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ratio&nbsp;-&nbsp;default:&nbsp;4.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compression&nbsp;ratio.&nbsp;Audio&nbsp;louder&nbsp;than&nbsp;the&nbsp;threshold&nbsp;will&nbsp;be&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reduced&nbsp;to&nbsp;1/ratio&nbsp;the&nbsp;volume.&nbsp;A&nbsp;ratio&nbsp;of&nbsp;4.0&nbsp;is&nbsp;equivalent&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;setting&nbsp;of&nbsp;4:1&nbsp;in&nbsp;a&nbsp;pro-audio&nbsp;compressor&nbsp;like&nbsp;the&nbsp;Waves&nbsp;C1.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;attack&nbsp;-&nbsp;default:&nbsp;5.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attack&nbsp;in&nbsp;milliseconds.&nbsp;How&nbsp;long&nbsp;it&nbsp;should&nbsp;take&nbsp;for&nbsp;the&nbsp;compressor<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;kick&nbsp;in&nbsp;once&nbsp;the&nbsp;audio&nbsp;has&nbsp;exceeded&nbsp;the&nbsp;threshold.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;release&nbsp;-&nbsp;default:&nbsp;50.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Release&nbsp;in&nbsp;milliseconds.&nbsp;How&nbsp;long&nbsp;it&nbsp;should&nbsp;take&nbsp;for&nbsp;the&nbsp;compressor<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;stop&nbsp;compressing&nbsp;after&nbsp;the&nbsp;audio&nbsp;has&nbsp;falled&nbsp;below&nbsp;the&nbsp;threshold.<br>
+&nbsp;<br>
+&nbsp;<br>
+For&nbsp;an&nbsp;overview&nbsp;of&nbsp;Dynamic&nbsp;Range&nbsp;Compression,&nbsp;and&nbsp;more&nbsp;detailed&nbsp;explanation<br>
+of&nbsp;the&nbsp;related&nbsp;terminology,&nbsp;see:&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://en.wikipedia.org/wiki/Dynamic_range_compression">http://en.wikipedia.org/wiki/Dynamic_range_compression</a></tt></dd></dl>
+ <dl><dt><a name="-high_pass_filter"><strong>high_pass_filter</strong></a>(seg, cutoff)</dt><dd><tt>cutoff&nbsp;-&nbsp;Frequency&nbsp;(in&nbsp;Hz)&nbsp;where&nbsp;lower&nbsp;frequency&nbsp;signal&nbsp;will&nbsp;begin&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;reduced&nbsp;by&nbsp;6dB&nbsp;per&nbsp;octave&nbsp;(doubling&nbsp;in&nbsp;frequency)&nbsp;below&nbsp;this&nbsp;point</tt></dd></dl>
+ <dl><dt><a name="-invert_phase"><strong>invert_phase</strong></a>(seg, channels=(1, 1))</dt><dd><tt>channels-&nbsp;specifies&nbsp;which&nbsp;channel&nbsp;(left&nbsp;or&nbsp;right)&nbsp;to&nbsp;reverse&nbsp;the&nbsp;phase&nbsp;of.<br>
+Note&nbsp;that&nbsp;mono&nbsp;AudioSegments&nbsp;will&nbsp;become&nbsp;stereo.</tt></dd></dl>
+ <dl><dt><a name="-low_pass_filter"><strong>low_pass_filter</strong></a>(seg, cutoff)</dt><dd><tt>cutoff&nbsp;-&nbsp;Frequency&nbsp;(in&nbsp;Hz)&nbsp;where&nbsp;higher&nbsp;frequency&nbsp;signal&nbsp;will&nbsp;begin&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;reduced&nbsp;by&nbsp;6dB&nbsp;per&nbsp;octave&nbsp;(doubling&nbsp;in&nbsp;frequency)&nbsp;above&nbsp;this&nbsp;point</tt></dd></dl>
+ <dl><dt><a name="-normalize"><strong>normalize</strong></a>(seg, headroom=0.1)</dt><dd><tt>headroom&nbsp;is&nbsp;how&nbsp;close&nbsp;to&nbsp;the&nbsp;maximum&nbsp;volume&nbsp;to&nbsp;boost&nbsp;the&nbsp;signal&nbsp;up&nbsp;to&nbsp;(specified&nbsp;in&nbsp;dB)</tt></dd></dl>
+ <dl><dt><a name="-pan"><strong>pan</strong></a>(seg, pan_amount)</dt><dd><tt>pan_amount&nbsp;should&nbsp;be&nbsp;between&nbsp;-1.0&nbsp;(100%&nbsp;left)&nbsp;and&nbsp;+1.0&nbsp;(100%&nbsp;right)<br>
+&nbsp;<br>
+When&nbsp;pan_amount&nbsp;==&nbsp;0.0&nbsp;the&nbsp;left/right&nbsp;balance&nbsp;is&nbsp;not&nbsp;changed.<br>
+&nbsp;<br>
+Panning&nbsp;does&nbsp;not&nbsp;alter&nbsp;the&nbsp;*perceived*&nbsp;loundness,&nbsp;but&nbsp;since&nbsp;loudness<br>
+is&nbsp;decreasing&nbsp;on&nbsp;one&nbsp;side,&nbsp;the&nbsp;other&nbsp;side&nbsp;needs&nbsp;to&nbsp;get&nbsp;louder&nbsp;to<br>
+compensate.&nbsp;When&nbsp;panned&nbsp;hard&nbsp;left,&nbsp;the&nbsp;left&nbsp;channel&nbsp;will&nbsp;be&nbsp;3dB&nbsp;louder.</tt></dd></dl>
+ <dl><dt><a name="-speedup"><strong>speedup</strong></a>(seg, playback_speed=1.5, chunk_size=150, crossfade=25)</dt></dl>
+ <dl><dt><a name="-strip_silence"><strong>strip_silence</strong></a>(seg, silence_len=1000, silence_thresh=-16, padding=100)</dt></dl>
+</td></tr></table>
+</body></html>
